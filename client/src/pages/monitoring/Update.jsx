@@ -108,6 +108,7 @@ const Update = () => {
       totalMember: "",
       province: "",
       municipality: "",
+      district: "",
       baranggay: "",
       projectReceived: "",
       scale: "",
@@ -188,7 +189,6 @@ const Update = () => {
   }, [data]);
 
   // CHANGE EVENTS ----------------------
-
   const handleChange = ({ target: { name, value, type, checked } }) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -218,7 +218,7 @@ const Update = () => {
         setShowToast(false);
       }, 3000);
 
-    //   console.log("Form updated successfully:", res.data);
+      //   console.log("Form updated successfully:", res.data);
     } catch (err) {
       console.error(
         "Error occurred:",
@@ -515,11 +515,28 @@ const Update = () => {
             </div>
 
             <div className="flex flex-col flex-1">
+              <p className="text-sm">District</p>
+              <input
+                type="text"
+                name="district"
+                value={formData.form.district}
+                onChange={handleChange}
+                className={`border-1 px-3 h-[42px] rounded-md focus:outline-none ${
+                  (formData.form.municipality || "").trim() === ""
+                    ? "cursor-not-allowed disabled:opacity-50 bg-gray-200 border-gray-400"
+                    : ""
+                }`}
+                placeholder="Enter district"
+                required
+              />
+            </div>
+
+            <div className="flex flex-col flex-1">
               <p className="text-sm">Barangay</p>
 
               <input
                 type="text"
-                className="border-1 border-gray-400 px-3 h-[42px] rounded-md focus:outline-none"
+                className={`border-1 border-gray-400 px-3 h-[42px] rounded-md focus:outline-none`}
                 name="baranggay"
                 value={formData.form.baranggay || ""}
                 onChange={handleChange}

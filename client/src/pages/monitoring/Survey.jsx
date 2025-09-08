@@ -20,6 +20,7 @@ const Survey = () => {
       totalMember: "",
       province: "",
       municipality: "",
+      district: "",
       baranggay: "",
       projectReceived: "",
       scale: "",
@@ -273,6 +274,10 @@ const Survey = () => {
 
     try {
       // console.log("specRemarks:", formData.form.specRemarks);
+      console.log("🔍 Form Data Before Submit:", formData.form);
+
+      // Return early to stop actual submission while debugging
+      return;
       const res = await axios.post(
         "https://bfar-server.onrender.com/survey/add",
         formData.form
@@ -479,7 +484,16 @@ const Survey = () => {
         <div className="flex flex-col gap-2 px-5 mt-2 sm:mt-0 sm:flex-row sm:p-2">
           <div className="flex flex-col flex-1">
             <p className="text-sm">Province</p>
-            <select
+            <input
+              type="text"
+              name="province"
+              value={formData.form.province}
+              onChange={handleProvinceChange}
+              placeholder="Enter province"
+              className="border-1 border-gray-400 px-3 h-[42px] rounded-md focus:outline-none"
+              required
+            />
+            {/* <select
               name="province"
               value={formData.form.province}
               onChange={handleProvinceChange}
@@ -494,19 +508,32 @@ const Survey = () => {
                   {prov.name}
                 </option>
               ))}
-            </select>
+            </select> */}
           </div>
 
           <div className="flex flex-col flex-1">
             <p className="text-sm">Municipality / City</p>
-            <select
+            <input
+              type="text"
+              name="municipality"
+              value={formData.form.municipality}
+              onChange={handleMunicipalityChange}
+              placeholder="Enter municipality"
+              disabled={!formData.form.province}
+              required
+              className={`border-1 border-gray-400 px-3 h-[42px] rounded-md focus:outline-none 
+              ${
+                !formData.form.province ? "bg-gray-200 cursor-not-allowed" : ""
+              }`}
+            />
+            {/* <select
               name="municipality"
               value={formData.form.municipality}
               onChange={handleMunicipalityChange}
               disabled={!formData.form.province}
               required
               className={`border-1 border-gray-400 px-3 h-[42px] rounded-md focus:outline-none 
-      ${!formData.form.province ? "bg-gray-200 cursor-not-allowed" : ""}`}
+                ${!formData.form.province ? "bg-gray-200 cursor-not-allowed" : ""}`}
             >
               <option value="" disabled>
                 - - Select - -
@@ -533,40 +560,38 @@ const Survey = () => {
                   ))}
                 </>
               )}
-            </select>
+            </select> */}
           </div>
 
           <div className="flex flex-col flex-1">
-            <p className="text-sm">Barangay</p>
-            {/* <select
-              name="baranggay"
-              value={formData.form.baranggay}
-              onChange={handleChange}
-              disabled={!formData.form.municipality}
-              required
-              className={`border-1 border-gray-400 px-3 h-[42px] rounded-md focus:outline-none 
-        ${!formData.form.municipality ? "bg-gray-200 cursor-not-allowed" : ""}`}
-            >
-              <option value="" disabled>
-                - - Select - -
-              </option>
-              {barangays.map((brgy) => (
-                <option key={brgy.code} value={brgy.name}>
-                  {brgy.name}
-                </option>
-              ))}
-            </select> */}
+            <p className="text-sm">District</p>
             <input
               type="text"
-              name="baranggay"
-              value={formData.form.baranggay}
+              name="district"
+              value={formData.form.district}
               onChange={handleChange}
               className={`border-1 px-3 h-[42px] rounded-md focus:outline-none ${
                 (formData.form.municipality || "").trim() === ""
                   ? "cursor-not-allowed disabled:opacity-50 bg-gray-200 border-gray-400"
                   : ""
               }`}
-              placeholder="Please specify"
+              placeholder="Enter district"
+              required
+            />
+          </div>
+          <div className="flex flex-col flex-1">
+            <p className="text-sm">Barangay</p>
+            <input
+              type="text"
+              name="baranggay"
+              value={formData.form.baranggay}
+              onChange={handleChange}
+              className={`border-1 px-3 h-[42px] rounded-md focus:outline-none ${
+                (formData.form.district || "").trim() === ""
+                  ? "cursor-not-allowed disabled:opacity-50 bg-gray-200 border-gray-400"
+                  : ""
+              }`}
+              placeholder="Enter barangay"
               required
             />
           </div>
@@ -773,11 +798,11 @@ const Survey = () => {
           <div className="flex flex-col flex-1">
             <p className="text-sm">Date Received/Implemented</p>
             <input
-              type="date"
+              type="text"
               name="dateReceived"
               value={formData.form.dateReceived}
               onChange={handleChange}
-              className="input w-full border-1 border-gray-400 px-3 h-[42px] rounded-md focus:border-0 focus:outline-none"
+              className="input w-full border-1 border-gray-400 px-3 h-[42px] rounded-md focus:outline-none"
             />
           </div>
         </div>
@@ -1949,11 +1974,21 @@ const Survey = () => {
               <input
                 type="radio"
                 name="q9_12"
-                value="N/A"
+                value="no"
                 onChange={handleChange}
                 required
               />
               No
+            </div>
+            <div className="flex gap-2 text-sm">
+              <input
+                type="radio"
+                name="q9_12"
+                value="n/a"
+                onChange={handleChange}
+                required
+              />
+              N/A
             </div>
           </div>
         </div>

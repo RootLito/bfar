@@ -15,10 +15,11 @@ const surveySchema = new Schema({
   boatR: { type: String },
 
   nameAssoc: { type: String},
-  totalMember: { type: Number},
+  totalMember: { type: String}, //changed to string
 
   province: { type: String },
   municipality: { type: String },
+  district: { type: String },  //added
   baranggay: { type: String },
 
   projectReceived: { type: String },
@@ -31,8 +32,8 @@ const surveySchema = new Schema({
   
   mainIncome: { type: String },
   otherIncome: { type: String },
-  noUnitsReceived: { type: Number },
-  dateReceived: { type: Date },
+  noUnitsReceived: { type: String }, //changed to string
+  dateReceived: { type: String },  //changed date to string
 
   lat: { type: Number},
   lon: { type: Number},
