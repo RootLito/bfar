@@ -143,8 +143,8 @@ const Summary = () => {
       }, {});
       setBarangayData(barangayCounts);
 
-      const male = surveys.filter((survey) => survey.sex === "Male").length;
-      const female = surveys.filter((survey) => survey.sex === "Female").length;
+      const male = surveys.filter((survey) => survey.sex === "male").length;   //CHANGED
+      const female = surveys.filter((survey) => survey.sex === "female").length;   //CHANGED
       setMaleCount(male);
       setFemaleCount(female);
 
@@ -168,16 +168,16 @@ const Summary = () => {
       );
 
       const statCounts = {
-        Single: surveys.filter((survey) => survey.civilStatus === "Single")
+        Single: surveys.filter((survey) => survey.civilStatus === "single")
           .length,
-        Married: surveys.filter((survey) => survey.civilStatus === "Married")
+        Married: surveys.filter((survey) => survey.civilStatus === "married")
           .length,
-        Widowed: surveys.filter((survey) => survey.civilStatus === "Widowed")
+        Widowed: surveys.filter((survey) => survey.civilStatus === "widowed")
           .length,
-        Divorced: surveys.filter((survey) => survey.civilStatus === "Divorced")
+        Divorced: surveys.filter((survey) => survey.civilStatus === "divorced")
           .length,
         Separated: surveys.filter(
-          (survey) => survey.civilStatus === "Separated"
+          (survey) => survey.civilStatus === "separated"
         ).length,
       };
 

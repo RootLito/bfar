@@ -208,6 +208,13 @@ const Update = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // 🔍 Debug log
+    console.log("📝 Form data to update:", formData.form);
+    console.log("🆔 ID to update:", id);
+
+    // ⛔ Stop here to prevent actual update request
+    return;
+
     try {
       const res = await axios.put(
         `https://bfar-server.onrender.com/survey/update/${id}`,
@@ -393,11 +400,11 @@ const Update = () => {
                 <option value="" disabled>
                   Select Status
                 </option>
-                <option value="Single">Single</option>
-                <option value="Married">Married</option>
-                <option value="Widowed">Widowed</option>
-                <option value="Divorced">Divorced</option>
-                <option value="Separated">Separated</option>
+                <option value="single">Single</option>
+                <option value="married">Married</option>
+                <option value="widowed">Widowed</option>
+                <option value="divorced">Divorced</option>
+                <option value="separated">Separated</option>
               </select>
             </div>
             <div className="flex flex-col sm:w-[150px]">
@@ -519,7 +526,7 @@ const Update = () => {
               <input
                 type="text"
                 name="district"
-                value={formData.form.district}
+                value={formData.form.district || ""} 
                 onChange={handleChange}
                 className={`border-1 px-3 h-[42px] rounded-md focus:outline-none ${
                   (formData.form.municipality || "").trim() === ""
