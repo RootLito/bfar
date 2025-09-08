@@ -49,6 +49,7 @@ const createSurvey = async (req, res) => {
 
       province,
       municipality,
+      district,
       baranggay,
 
       projectReceived,
@@ -151,6 +152,7 @@ const createSurvey = async (req, res) => {
 
       province,
       municipality,
+      district,
       baranggay,
 
       projectReceived,
@@ -264,6 +266,7 @@ const updateSurvey = async (req, res) => {
 
       province,
       municipality,
+      district,
       baranggay,
 
       projectReceived,
@@ -368,6 +371,7 @@ const updateSurvey = async (req, res) => {
     if (totalMember) survey.totalMember = totalMember;
     if (province) survey.province = province;
     if (municipality) survey.municipality = municipality;
+    if (district) survey.district = district;
     if (baranggay) survey.baranggay = baranggay;
     if (projectReceived) survey.projectReceived = projectReceived;
     if (specProject) survey.specProject = specProject;

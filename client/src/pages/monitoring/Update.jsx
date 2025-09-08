@@ -208,12 +208,9 @@ const Update = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 🔍 Debug log
-    console.log("📝 Form data to update:", formData.form);
-    console.log("🆔 ID to update:", id);
-
-    // ⛔ Stop here to prevent actual update request
-    return;
+    // console.log("Form data to update:", formData.form);
+    // console.log("ID to update:", id);
+    // return;
 
     try {
       const res = await axios.put(
